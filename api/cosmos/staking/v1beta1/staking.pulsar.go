@@ -1663,6 +1663,7 @@ var (
 	fd_Description_website          protoreflect.FieldDescriptor
 	fd_Description_security_contact protoreflect.FieldDescriptor
 	fd_Description_details          protoreflect.FieldDescriptor
+	fd_Description_region_id        protoreflect.FieldDescriptor
 )
 
 func init() {
@@ -1673,6 +1674,7 @@ func init() {
 	fd_Description_website = md_Description.Fields().ByName("website")
 	fd_Description_security_contact = md_Description.Fields().ByName("security_contact")
 	fd_Description_details = md_Description.Fields().ByName("details")
+	fd_Description_region_id = md_Description.Fields().ByName("region_id")
 }
 
 var _ protoreflect.Message = (*fastReflection_Description)(nil)
@@ -1770,6 +1772,12 @@ func (x *fastReflection_Description) Range(f func(protoreflect.FieldDescriptor, 
 			return
 		}
 	}
+	if x.RegionId != "" {
+		value := protoreflect.ValueOfString(x.RegionId)
+		if !f(fd_Description_region_id, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -1795,6 +1803,8 @@ func (x *fastReflection_Description) Has(fd protoreflect.FieldDescriptor) bool {
 		return x.SecurityContact != ""
 	case "cosmos.staking.v1beta1.Description.details":
 		return x.Details != ""
+	case "cosmos.staking.v1beta1.Description.region_id":
+		return x.RegionId != ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmos.staking.v1beta1.Description"))
@@ -1821,6 +1831,8 @@ func (x *fastReflection_Description) Clear(fd protoreflect.FieldDescriptor) {
 		x.SecurityContact = ""
 	case "cosmos.staking.v1beta1.Description.details":
 		x.Details = ""
+	case "cosmos.staking.v1beta1.Description.region_id":
+		x.RegionId = ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmos.staking.v1beta1.Description"))
@@ -1852,6 +1864,9 @@ func (x *fastReflection_Description) Get(descriptor protoreflect.FieldDescriptor
 	case "cosmos.staking.v1beta1.Description.details":
 		value := x.Details
 		return protoreflect.ValueOfString(value)
+	case "cosmos.staking.v1beta1.Description.region_id":
+		value := x.RegionId
+		return protoreflect.ValueOfString(value)
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmos.staking.v1beta1.Description"))
@@ -1882,6 +1897,8 @@ func (x *fastReflection_Description) Set(fd protoreflect.FieldDescriptor, value 
 		x.SecurityContact = value.Interface().(string)
 	case "cosmos.staking.v1beta1.Description.details":
 		x.Details = value.Interface().(string)
+	case "cosmos.staking.v1beta1.Description.region_id":
+		x.RegionId = value.Interface().(string)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmos.staking.v1beta1.Description"))
@@ -1912,6 +1929,8 @@ func (x *fastReflection_Description) Mutable(fd protoreflect.FieldDescriptor) pr
 		panic(fmt.Errorf("field security_contact of message cosmos.staking.v1beta1.Description is not mutable"))
 	case "cosmos.staking.v1beta1.Description.details":
 		panic(fmt.Errorf("field details of message cosmos.staking.v1beta1.Description is not mutable"))
+	case "cosmos.staking.v1beta1.Description.region_id":
+		panic(fmt.Errorf("field region_id of message cosmos.staking.v1beta1.Description is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmos.staking.v1beta1.Description"))
@@ -1934,6 +1953,8 @@ func (x *fastReflection_Description) NewField(fd protoreflect.FieldDescriptor) p
 	case "cosmos.staking.v1beta1.Description.security_contact":
 		return protoreflect.ValueOfString("")
 	case "cosmos.staking.v1beta1.Description.details":
+		return protoreflect.ValueOfString("")
+	case "cosmos.staking.v1beta1.Description.region_id":
 		return protoreflect.ValueOfString("")
 	default:
 		if fd.IsExtension() {
@@ -2024,6 +2045,10 @@ func (x *fastReflection_Description) ProtoMethods() *protoiface.Methods {
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
+		l = len(x.RegionId)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -2052,6 +2077,13 @@ func (x *fastReflection_Description) ProtoMethods() *protoiface.Methods {
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if len(x.RegionId) > 0 {
+			i -= len(x.RegionId)
+			copy(dAtA[i:], x.RegionId)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.RegionId)))
+			i--
+			dAtA[i] = 0x32
 		}
 		if len(x.Details) > 0 {
 			i -= len(x.Details)
@@ -2296,6 +2328,38 @@ func (x *fastReflection_Description) ProtoMethods() *protoiface.Methods {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
 				x.Details = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 6:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field RegionId", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.RegionId = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
@@ -12966,7 +13030,8 @@ type Description struct {
 	// security_contact defines an optional email for security contact.
 	SecurityContact string `protobuf:"bytes,4,opt,name=security_contact,json=securityContact,proto3" json:"security_contact,omitempty"`
 	// details define other optional details.
-	Details string `protobuf:"bytes,5,opt,name=details,proto3" json:"details,omitempty"`
+	Details  string `protobuf:"bytes,5,opt,name=details,proto3" json:"details,omitempty"`
+	RegionId string `protobuf:"bytes,6,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
 }
 
 func (x *Description) Reset() {
@@ -13020,6 +13085,13 @@ func (x *Description) GetSecurityContact() string {
 func (x *Description) GetDetails() string {
 	if x != nil {
 		return x.Details
+	}
+	return ""
+}
+
+func (x *Description) GetRegionId() string {
+	if x != nil {
+		return x.RegionId
 	}
 	return ""
 }
