@@ -208,8 +208,8 @@ func (k Keeper) SlashWithInfractionReason(ctx context.Context, consAddr sdk.Cons
 
 // jail a validator
 func (k Keeper) Jail(ctx context.Context, consAddr sdk.ConsAddress) error {
-	validator := k.mustGetValidatorByConsAddr(ctx, consAddr)
-	if err := k.jailValidator(ctx, validator); err != nil {
+	validator := k.MustGetValidatorByConsAddr(ctx, consAddr)
+	if err := k.JailValidator(ctx, validator); err != nil {
 		return err
 	}
 
@@ -220,8 +220,8 @@ func (k Keeper) Jail(ctx context.Context, consAddr sdk.ConsAddress) error {
 
 // unjail a validator
 func (k Keeper) Unjail(ctx context.Context, consAddr sdk.ConsAddress) error {
-	validator := k.mustGetValidatorByConsAddr(ctx, consAddr)
-	if err := k.unjailValidator(ctx, validator); err != nil {
+	validator := k.MustGetValidatorByConsAddr(ctx, consAddr)
+	if err := k.unJailValidator(ctx, validator); err != nil {
 		return err
 	}
 	logger := k.Logger(ctx)

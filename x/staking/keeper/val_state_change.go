@@ -156,7 +156,7 @@ func (k Keeper) ApplyAndReturnValidatorSetUpdates(ctx context.Context) (updates 
 		// everything that is iterated in this loop is becoming or already a
 		// part of the bonded validator set
 		valAddr := sdk.ValAddress(iterator.Value())
-		validator := k.mustGetValidator(ctx, valAddr)
+		validator := k.MustGetValidator(ctx, valAddr)
 
 		if validator.Jailed {
 			panic("should never retrieve a jailed validator from the power store")
@@ -218,7 +218,7 @@ func (k Keeper) ApplyAndReturnValidatorSetUpdates(ctx context.Context) (updates 
 	}
 
 	for _, valAddrBytes := range noLongerBonded {
-		validator := k.mustGetValidator(ctx, sdk.ValAddress(valAddrBytes))
+		validator := k.MustGetValidator(ctx, sdk.ValAddress(valAddrBytes))
 		validator, err = k.bondedToUnbonding(ctx, validator)
 		if err != nil {
 			return nil, err
@@ -244,13 +244,9 @@ func (k Keeper) ApplyAndReturnValidatorSetUpdates(ctx context.Context) (updates 
 	// Compare and subtract the respective amounts to only perform one transfer.
 	// This is done in order to avoid doing multiple updates inside each iterator/loop.
 	case amtFromNotBondedToBonded.GT(amtFromBondedToNotBonded):
-		if err = k.notBondedTokensToBonded(ctx, amtFromNotBondedToBonded.Sub(amtFromBondedToNotBonded)); err != nil {
-			return nil, err
-		}
+		k.NotBondedStakeTokensToBonded(ctx, amtFromNotBondedToBonded.Sub(amtFromBondedToNotBonded))
 	case amtFromNotBondedToBonded.LT(amtFromBondedToNotBonded):
-		if err = k.bondedTokensToNotBonded(ctx, amtFromBondedToNotBonded.Sub(amtFromNotBondedToBonded)); err != nil {
-			return nil, err
-		}
+		k.BondedStakeTokensToNotBonded(ctx, amtFromBondedToNotBonded.Sub(amtFromNotBondedToBonded))
 	default: // equal amounts of tokens; no update required
 	}
 
@@ -305,7 +301,7 @@ func (k Keeper) UnbondingToUnbonded(ctx context.Context, validator types.Validat
 }
 
 // send a validator to jail
-func (k Keeper) jailValidator(ctx context.Context, validator types.Validator) error {
+func (k Keeper) JailValidator(ctx context.Context, validator types.Validator) error {
 	if validator.Jailed {
 		return types.ErrValidatorJailed.Wrapf("cannot jail already jailed validator, validator: %v", validator)
 	}
@@ -319,7 +315,7 @@ func (k Keeper) jailValidator(ctx context.Context, validator types.Validator) er
 }
 
 // remove a validator from jail
-func (k Keeper) unjailValidator(ctx context.Context, validator types.Validator) error {
+func (k Keeper) unJailValidator(ctx context.Context, validator types.Validator) error {
 	if !validator.Jailed {
 		return fmt.Errorf("cannot unjail already unjailed validator, validator: %v", validator)
 	}

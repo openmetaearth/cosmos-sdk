@@ -111,3 +111,27 @@ func (k Keeper) BondedRatio(ctx context.Context) (math.LegacyDec, error) {
 
 	return math.LegacyZeroDec(), nil
 }
+
+// bondedStakeTokensToNotBonded transfers coins from the bonded to the not bonded pool within staking
+func (k Keeper) BondedStakeTokensToNotBonded(ctx context.Context, tokens math.Int) {
+	bondDenom, err := k.BondDenom(ctx)
+	if err != nil {
+		panic(err)
+	}
+	coins := sdk.NewCoins(sdk.NewCoin(bondDenom, tokens))
+	if err := k.bankKeeper.SendCoinsFromModuleToModule(ctx, types.BondedStakePoolName, types.NotBondedStakePoolName, coins); err != nil {
+		panic(err)
+	}
+}
+
+// notBondedStakeTokensToBonded transfers coins from the not bonded to the bonded pool within staking
+func (k Keeper) NotBondedStakeTokensToBonded(ctx context.Context, tokens math.Int) {
+	bondDenom, err := k.BondDenom(ctx)
+	if err != nil {
+		panic(err)
+	}
+	coins := sdk.NewCoins(sdk.NewCoin(bondDenom, tokens))
+	if err := k.bankKeeper.SendCoinsFromModuleToModule(ctx, types.NotBondedStakePoolName, types.BondedStakePoolName, coins); err != nil {
+		panic(err)
+	}
+}

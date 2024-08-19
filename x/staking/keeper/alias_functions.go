@@ -55,7 +55,7 @@ func (k Keeper) IterateBondedValidatorsByPower(ctx context.Context, fn func(inde
 	i := int64(0)
 	for ; iterator.Valid() && i < int64(maxValidators); iterator.Next() {
 		address := iterator.Value()
-		validator := k.mustGetValidator(ctx, address)
+		validator := k.MustGetValidator(ctx, address)
 
 		if validator.IsBonded() {
 			stop := fn(i, validator) // XXX is this safe will the validator unexposed fields be able to get written to?
