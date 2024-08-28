@@ -219,13 +219,13 @@ func (k Keeper) RemoveValidator(ctx context.Context, address sdk.ValAddress) err
 		return nil
 	}
 
-	if !validator.IsUnbonded() {
-		return types.ErrBadRemoveValidator.Wrap("cannot call RemoveValidator on bonded or unbonding validators")
-	}
+	// if !validator.IsUnbonded() {
+	// 	return types.ErrBadRemoveValidator.Wrap("cannot call RemoveValidator on bonded or unbonding validators")
+	// }
 
-	if validator.Tokens.IsPositive() {
-		return types.ErrBadRemoveValidator.Wrap("attempting to remove a validator which still contains tokens")
-	}
+	// if validator.Tokens.IsPositive() {
+	// 	return types.ErrBadRemoveValidator.Wrap("attempting to remove a validator which still contains tokens")
+	// }
 
 	valConsAddr, err := validator.GetConsAddr()
 	if err != nil {
