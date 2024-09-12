@@ -21,6 +21,10 @@ func NewDelegation(delegatorAddr, validatorAddr string, shares math.LegacyDec) D
 		DelegatorAddress: delegatorAddr,
 		ValidatorAddress: validatorAddr,
 		Shares:           shares,
+		StartHeight:      0,
+		Amount:           sdk.ZeroInt(),
+		Unmovable:        sdk.ZeroInt(),
+		UnMeidAmount:     sdk.ZeroInt(),
 	}
 }
 
