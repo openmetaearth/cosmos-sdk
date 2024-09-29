@@ -76,8 +76,8 @@ message Description {
   // security_contact defines an optional email for security contact.
   string security_contact = 4;
   // details define other optional details.
-  string details   = 5;
-  string region_id = 6;
+  string details  = 5;
+  string regionID = 6;
 }
 
 // Validator defines a validator, together with the total amount of the
