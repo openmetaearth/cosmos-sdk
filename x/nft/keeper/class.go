@@ -75,3 +75,9 @@ func (k Keeper) HasClass(ctx context.Context, classID string) bool {
 	}
 	return has
 }
+
+// SaveClass defines a method for creating a new nft class
+func (k Keeper) DeleteClass(ctx sdk.Context, classId string) {
+	store := ctx.KVStore(k.storeKey)
+	store.Delete(classStoreKey(classId))
+}
