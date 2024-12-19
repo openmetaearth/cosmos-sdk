@@ -11,7 +11,6 @@ import (
 	cryptotypes "github.com/cosmos/cosmos-sdk/crypto/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/slashing/types"
-	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 )
 
 // HandleValidatorSignature handles a validator signature, must be called once per validator per block.
@@ -122,17 +121,16 @@ func (k Keeper) HandleValidatorSignature(ctx context.Context, addr cryptotypes.A
 			// Note that this *can* result in a negative "distributionHeight" up to -ValidatorUpdateDelay-1,
 			// i.e. at the end of the pre-genesis block (none) = at the beginning of the genesis block.
 			// That's fine since this is just used to filter unbonding delegations & redelegations.
-			distributionHeight := height - sdk.ValidatorUpdateDelay - 1
+			//distributionHeight := height - sdk.ValidatorUpdateDelay - 1
 
+			// ME Hub customization: Get slashFractionDowntime for logging, but don't actually slash
 			slashFractionDowntime, err := k.SlashFractionDowntime(ctx)
 			if err != nil {
 				return err
 			}
 
-			coinsBurned, err := k.sk.SlashWithInfractionReason(ctx, consAddr, distributionHeight, power, slashFractionDowntime, stakingtypes.Infraction_INFRACTION_DOWNTIME)
-			if err != nil {
-				return err
-			}
+			// ME Hub customization: DO NOT call SlashWithInfractionReason - we don't burn coins for downtime
+			// coinsBurned, err := k.sk.SlashWithInfractionReason(ctx, consAddr, distributionHeight, power, slashFractionDowntime, stakingtypes.Infraction_INFRACTION_DOWNTIME)
 
 			sdkCtx.EventManager().EmitEvent(
 				sdk.NewEvent(
@@ -141,7 +139,8 @@ func (k Keeper) HandleValidatorSignature(ctx context.Context, addr cryptotypes.A
 					sdk.NewAttribute(types.AttributeKeyPower, fmt.Sprintf("%d", power)),
 					sdk.NewAttribute(types.AttributeKeyReason, types.AttributeValueMissingSignature),
 					sdk.NewAttribute(types.AttributeKeyJailed, consAddr.String()),
-					sdk.NewAttribute(types.AttributeKeyBurnedCoins, coinsBurned.String()),
+					// ME Hub customization: Don't record BurnedCoins since we don't burn
+					// sdk.NewAttribute(types.AttributeKeyBurnedCoins, coinsBurned.String()),
 				),
 			)
 			k.sk.Jail(sdkCtx, consAddr)
