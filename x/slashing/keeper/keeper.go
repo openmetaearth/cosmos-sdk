@@ -83,10 +83,10 @@ func (k Keeper) Slash(ctx context.Context, consAddr sdk.ConsAddress, fraction sd
 // SlashWithInfractionReason attempts to slash a validator. The slash is delegated to the staking
 // module to make the necessary validator changes. It specifies an intraction reason.
 func (k Keeper) SlashWithInfractionReason(ctx context.Context, consAddr sdk.ConsAddress, fraction sdkmath.LegacyDec, power, distributionHeight int64, infraction stakingtypes.Infraction) error {
-	coinsBurned, err := k.sk.SlashWithInfractionReason(ctx, consAddr, distributionHeight, power, fraction, infraction)
-	if err != nil {
-		return err
-	}
+	// coinsBurned, err := k.sk.SlashWithInfractionReason(ctx, consAddr, distributionHeight, power, fraction, infraction)
+	// if err != nil {
+	// 	return err
+	// }
 
 	reasonAttr := sdk.NewAttribute(types.AttributeKeyReason, types.AttributeValueUnspecified)
 	switch infraction {
@@ -103,7 +103,7 @@ func (k Keeper) SlashWithInfractionReason(ctx context.Context, consAddr sdk.Cons
 			sdk.NewAttribute(types.AttributeKeyAddress, consAddr.String()),
 			sdk.NewAttribute(types.AttributeKeyPower, fmt.Sprintf("%d", power)),
 			reasonAttr,
-			sdk.NewAttribute(types.AttributeKeyBurnedCoins, coinsBurned.String()),
+			//sdk.NewAttribute(types.AttributeKeyBurnedCoins, coinsBurned.String()),
 		),
 	)
 	return nil
