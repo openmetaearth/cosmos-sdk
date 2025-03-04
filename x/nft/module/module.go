@@ -45,6 +45,14 @@ func (AppModuleBasic) Name() string {
 	return nft.ModuleName
 }
 
+func (AppModuleBasic) RegisterCodec(cdc *codec.LegacyAmino) {
+	nft.RegisterCodec(cdc)
+}
+
+func (AppModuleBasic) RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {
+	nft.RegisterCodec(cdc)
+}
+
 // RegisterServices registers a gRPC query service to respond to the
 // module-specific gRPC queries.
 func (am AppModule) RegisterServices(registrar grpc.ServiceRegistrar) error {
@@ -52,9 +60,6 @@ func (am AppModule) RegisterServices(registrar grpc.ServiceRegistrar) error {
 	nft.RegisterQueryServer(registrar, am.keeper)
 	return nil
 }
-
-// RegisterLegacyAminoCodec registers the nft module's types for the given codec.
-func (AppModuleBasic) RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {}
 
 // RegisterInterfaces registers the nft module's interface types
 func (AppModuleBasic) RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
