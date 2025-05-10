@@ -68,16 +68,20 @@ message Description {
   option (gogoproto.goproto_stringer) = false;
 
   // moniker defines a human-readable name for the validator.
-  string moniker = 1;
+  string moniker = 1 [(gogoproto.jsontag) = "moniker"];
   // identity defines an optional identity signature (ex. UPort or Keybase).
-  string identity = 2;
+  string identity = 2 [(gogoproto.jsontag) = "identity"];
   // website defines an optional website link.
-  string website = 3;
+  string website = 3 [(gogoproto.jsontag) = "website"];
   // security_contact defines an optional email for security contact.
-  string security_contact = 4;
+  string security_contact = 4 [(gogoproto.jsontag) = "security_contact"];
   // details define other optional details.
-  string details = 5;
-  string regionID = 6;
+  string details = 5 [(gogoproto.jsontag) = "details"];
+  string regionID = 6 [
+    (gogoproto.nullable) = true,
+    (amino.dont_omitempty) = false,
+    (gogoproto.jsontag) = "regionID,omitempty"
+  ];
 }
 
 // Validator defines a validator, together with the total amount of the
