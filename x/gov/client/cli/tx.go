@@ -68,7 +68,7 @@ func NewTxCmd(legacyPropCmds []*cobra.Command) *cobra.Command {
 	govTxCmd.AddCommand(
 		NewCmdDeposit(),
 		NewCmdVote(),
-		NewCmdWeightedVote(),
+		//NewCmdWeightedVote(),
 		NewCmdSubmitProposal(),
 		NewCmdDraftProposal(),
 
