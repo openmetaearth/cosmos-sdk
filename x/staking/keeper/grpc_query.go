@@ -117,13 +117,13 @@ func (k Querier) ValidatorDelegations(c context.Context, req *types.QueryValidat
 		dels = append(dels, *d)
 	}
 
-	delResponses, err := DelegationsToDelegationResponses(ctx, k.Keeper, dels)
-	if err != nil {
-		return nil, status.Error(codes.Internal, err.Error())
-	}
+	//delResponses, err := DelegationsToDelegationResponses(ctx, k.Keeper, dels)
+	//if err != nil {
+	//	return nil, status.Error(codes.Internal, err.Error())
+	//}
 
 	return &types.QueryValidatorDelegationsResponse{
-		DelegationResponses: delResponses, Pagination: pageRes,
+		DelegationResponses: dels, Pagination: pageRes,
 	}, nil
 }
 

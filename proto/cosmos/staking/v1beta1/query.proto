@@ -173,8 +173,8 @@ message QueryValidatorDelegationsRequest {
 // QueryValidatorDelegationsResponse is response type for the
 // Query/ValidatorDelegations RPC method
 message QueryValidatorDelegationsResponse {
-  repeated DelegationResponse delegation_responses = 1
-      [(gogoproto.nullable) = false, (amino.dont_omitempty) = true, (gogoproto.castrepeated) = "DelegationResponses"];
+  repeated Delegation delegation_responses = 1
+      [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
 
   // pagination defines the pagination in the response.
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
