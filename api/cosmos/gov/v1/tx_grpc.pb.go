@@ -127,8 +127,9 @@ func (c *msgClient) UpdateParams(ctx context.Context, in *MsgUpdateParams, opts 
 }
 
 func (c *msgClient) CancelProposal(ctx context.Context, in *MsgCancelProposal, opts ...grpc.CallOption) (*MsgCancelProposalResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(MsgCancelProposalResponse)
-	err := c.cc.Invoke(ctx, Msg_CancelProposal_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Msg_CancelProposal_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

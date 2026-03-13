@@ -73,8 +73,9 @@ func (c *msgClient) RevokeAllowance(ctx context.Context, in *MsgRevokeAllowance,
 }
 
 func (c *msgClient) PruneAllowances(ctx context.Context, in *MsgPruneAllowances, opts ...grpc.CallOption) (*MsgPruneAllowancesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(MsgPruneAllowancesResponse)
-	err := c.cc.Invoke(ctx, Msg_PruneAllowances_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Msg_PruneAllowances_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

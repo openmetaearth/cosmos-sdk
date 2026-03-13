@@ -67,8 +67,9 @@ func NewQueryClient(cc grpc.ClientConnInterface) QueryClient {
 }
 
 func (c *queryClient) Constitution(ctx context.Context, in *QueryConstitutionRequest, opts ...grpc.CallOption) (*QueryConstitutionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(QueryConstitutionResponse)
-	err := c.cc.Invoke(ctx, Query_Constitution_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Query_Constitution_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

@@ -194,8 +194,9 @@ func (c *queryClient) DenomMetadata(ctx context.Context, in *QueryDenomMetadataR
 }
 
 func (c *queryClient) DenomMetadataByQueryString(ctx context.Context, in *QueryDenomMetadataByQueryStringRequest, opts ...grpc.CallOption) (*QueryDenomMetadataByQueryStringResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(QueryDenomMetadataByQueryStringResponse)
-	err := c.cc.Invoke(ctx, Query_DenomMetadataByQueryString_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Query_DenomMetadataByQueryString_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -223,8 +224,9 @@ func (c *queryClient) DenomOwners(ctx context.Context, in *QueryDenomOwnersReque
 }
 
 func (c *queryClient) DenomOwnersByQuery(ctx context.Context, in *QueryDenomOwnersByQueryRequest, opts ...grpc.CallOption) (*QueryDenomOwnersByQueryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(QueryDenomOwnersByQueryResponse)
-	err := c.cc.Invoke(ctx, Query_DenomOwnersByQuery_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Query_DenomOwnersByQuery_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

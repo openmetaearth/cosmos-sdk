@@ -54,8 +54,9 @@ func (c *serviceClient) Config(ctx context.Context, in *ConfigRequest, opts ...g
 }
 
 func (c *serviceClient) Status(ctx context.Context, in *StatusRequest, opts ...grpc.CallOption) (*StatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(StatusResponse)
-	err := c.cc.Invoke(ctx, Service_Status_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Service_Status_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

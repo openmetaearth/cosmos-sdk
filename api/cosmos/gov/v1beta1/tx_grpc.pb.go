@@ -29,7 +29,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Msg defines the bank Msg service.
+// Msg defines the gov Msg service.
 type MsgClient interface {
 	// SubmitProposal defines a method to create new proposal given a content.
 	SubmitProposal(ctx context.Context, in *MsgSubmitProposal, opts ...grpc.CallOption) (*MsgSubmitProposalResponse, error)
@@ -95,7 +95,7 @@ func (c *msgClient) Deposit(ctx context.Context, in *MsgDeposit, opts ...grpc.Ca
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility.
 //
-// Msg defines the bank Msg service.
+// Msg defines the gov Msg service.
 type MsgServer interface {
 	// SubmitProposal defines a method to create new proposal given a content.
 	SubmitProposal(context.Context, *MsgSubmitProposal) (*MsgSubmitProposalResponse, error)

@@ -134,8 +134,9 @@ func (c *msgClient) CommunityPoolSpend(ctx context.Context, in *MsgCommunityPool
 }
 
 func (c *msgClient) DepositValidatorRewardsPool(ctx context.Context, in *MsgDepositValidatorRewardsPool, opts ...grpc.CallOption) (*MsgDepositValidatorRewardsPoolResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(MsgDepositValidatorRewardsPoolResponse)
-	err := c.cc.Invoke(ctx, Msg_DepositValidatorRewardsPool_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Msg_DepositValidatorRewardsPool_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
