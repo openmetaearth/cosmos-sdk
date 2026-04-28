@@ -4,7 +4,7 @@ require (
 	cosmossdk.io/indexer/postgres v0.0.0-00010101000000-000000000000
 	cosmossdk.io/schema v0.1.1
 	github.com/fergusstrange/embedded-postgres v1.28.0
-	github.com/hashicorp/consul/sdk v0.16.1
+	github.com/hashicorp/consul/sdk v0.18.1
 	github.com/jackc/pgx/v5 v5.6.0
 	github.com/stretchr/testify v1.9.0
 	gotest.tools/v3 v3.5.1
@@ -23,7 +23,7 @@ require (
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
 	golang.org/x/crypto v0.26.0 // indirect
 	golang.org/x/sync v0.8.0 // indirect
-	golang.org/x/sys v0.23.0 // indirect
+	golang.org/x/sys v0.41.0 // indirect
 	golang.org/x/text v0.17.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
@@ -32,4 +32,4 @@ replace cosmossdk.io/indexer/postgres => ../.
 
 replace cosmossdk.io/schema => ../../../schema
 
-go 1.22
+go 1.26
