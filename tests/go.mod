@@ -29,7 +29,7 @@ require (
 	github.com/stretchr/testify v1.9.0
 	google.golang.org/grpc v1.64.1
 	google.golang.org/protobuf v1.34.2
-	gotest.tools/v3 v3.5.1
+	gotest.tools/v3 v3.5.2
 	pgregory.net/rapid v1.1.0
 )
 
