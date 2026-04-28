@@ -16,7 +16,7 @@ require (
 	google.golang.org/grpc v1.64.1
 	google.golang.org/protobuf v1.34.2
 	gotest.tools/v3 v3.5.1
-	sigs.k8s.io/yaml v1.4.0
+	sigs.k8s.io/yaml v1.6.0
 )
 
 require (
@@ -173,6 +173,7 @@ require (
 require (
 	cosmossdk.io/schema v0.1.1 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
+	go.yaml.in/yaml/v2 v2.4.2 // indirect
 )
 
 replace github.com/cosmos/cosmos-sdk => ./../../
