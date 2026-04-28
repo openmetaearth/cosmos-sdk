@@ -7,7 +7,7 @@ replace cosmossdk.io/core => ../
 require (
 	cosmossdk.io/core v0.12.0
 	github.com/cosmos/gogoproto v1.6.0
-	github.com/tidwall/btree v1.7.0
+	github.com/tidwall/btree v1.8.1
 )
 
 require (
