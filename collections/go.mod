@@ -6,7 +6,7 @@ require (
 	cosmossdk.io/core v0.12.0
 	cosmossdk.io/core/testing v0.0.0-00010101000000-000000000000
 	github.com/stretchr/testify v1.9.0
-	pgregory.net/rapid v1.1.0
+	pgregory.net/rapid v1.2.0
 )
 
 require (
