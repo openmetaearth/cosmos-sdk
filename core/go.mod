@@ -1,14 +1,12 @@
 module cosmossdk.io/core
 
-go 1.20
+go 1.23.2
 
-require github.com/cosmos/gogoproto v1.6.0
+require github.com/cosmos/gogoproto v1.7.2
 
 require (
-	github.com/golang/protobuf v1.5.4 // indirect
-	github.com/google/go-cmp v0.6.0 // indirect
-	golang.org/x/exp v0.0.0-20231006140011-7918f672742d // indirect
-	google.golang.org/protobuf v1.34.2 // indirect
+	github.com/google/go-cmp v0.7.0 // indirect
+	google.golang.org/protobuf v1.36.10 // indirect
 )
 
 // Version tagged too early and incompatible with v0.50 (latest at the time of tagging)
