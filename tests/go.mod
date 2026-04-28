@@ -1,6 +1,6 @@
 module github.com/cosmos/cosmos-sdk/tests
 
-go 1.22.2
+go 1.23
 
 require (
 	cosmossdk.io/api v0.7.5
@@ -28,7 +28,7 @@ require (
 	github.com/spf13/cobra v1.8.1
 	github.com/stretchr/testify v1.9.0
 	google.golang.org/grpc v1.64.1
-	google.golang.org/protobuf v1.34.2
+	google.golang.org/protobuf v1.36.11
 	gotest.tools/v3 v3.5.1
 	pgregory.net/rapid v1.1.0
 )
@@ -49,7 +49,7 @@ require (
 	cosmossdk.io/x/slashing v0.0.0-00010101000000-000000000000
 	cosmossdk.io/x/staking v0.0.0-20240226161501-23359a0b6d91
 	github.com/cometbft/cometbft/api v1.0.0-rc.1
-	github.com/google/go-cmp v0.6.0
+	github.com/google/go-cmp v0.7.0
 	github.com/google/gofuzz v1.2.0
 	github.com/jhump/protoreflect v1.16.0
 	github.com/spf13/viper v1.19.0
