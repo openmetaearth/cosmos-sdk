@@ -49,7 +49,7 @@ service Msg {
 
 // MsgCreateValidator defines a SDK message for creating a new validator.
 message MsgCreateValidator {
-  option (cosmos.msg.v1.signer) = "validator_address";
+  option (cosmos.msg.v1.signer) = "delegator_address";
   option (amino.name)           = "cosmos-sdk/MsgCreateValidator";
 
   option (gogoproto.equal)           = false;

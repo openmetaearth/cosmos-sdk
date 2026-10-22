@@ -394,26 +394,32 @@ lint-fix:
 ###############################################################################
 
 protoVer=0.14.0
-protoImageName=cosmossdk-proto:latest
+# Built from contrib/devtools/Dockerfile.proto. That file extends the public
+# ghcr.io/cosmos/proto-builder image with the protoc plugins this branch uses.
+protoImageName=cosmossdk-proto:$(protoVer)
 protoImage=$(DOCKER) run --rm -v $(CURDIR):/workspace --workdir /workspace $(protoImageName)
+
+proto-image:
+	@echo "Ensuring Protobuf image $(protoImageName)"
+	$(DOCKER) build -t $(protoImageName) -f contrib/devtools/Dockerfile.proto contrib/devtools
 
 proto-all: proto-format proto-lint proto-gen
 
-proto-gen:
+proto-gen: proto-image
 	@echo "Generating Protobuf files"
 	@$(protoImage) sh ./scripts/protocgen.sh
 
-proto-swagger-gen:
+proto-swagger-gen: proto-image
 	@echo "Generating Protobuf Swagger"
 	@$(protoImage) sh ./scripts/protoc-swagger-gen.sh
 
-proto-format:
+proto-format: proto-image
 	@$(protoImage) find ./ -name "*.proto" -exec clang-format -i {} \;
 
-proto-lint:
+proto-lint: proto-image
 	@$(protoImage) buf lint --error-format=json
 
-proto-check-breaking:
+proto-check-breaking: proto-image
 	@$(protoImage) buf breaking --against $(HTTPS_GIT)#branch=main
 
 CMT_URL              = https://raw.githubusercontent.com/cometbft/cometbft/v0.38.0/proto/tendermint
@@ -425,7 +431,7 @@ CMT_VERSION          = proto/tendermint/version
 CMT_LIBS             = proto/tendermint/libs/bits
 CMT_P2P              = proto/tendermint/p2p
 
-proto-update-deps:
+proto-update-deps: proto-image
 	@echo "Updating Protobuf dependencies"
 
 	@mkdir -p $(CMT_ABCI_TYPES)
@@ -453,7 +459,7 @@ proto-update-deps:
 
 	$(DOCKER) run --rm -v $(CURDIR)/proto:/workspace --workdir /workspace $(protoImageName) buf mod update
 
-.PHONY: proto-all proto-gen proto-swagger-gen proto-format proto-lint proto-check-breaking proto-update-deps
+.PHONY: proto-image proto-all proto-gen proto-swagger-gen proto-format proto-lint proto-check-breaking proto-update-deps
 
 ###############################################################################
 ###                                Localnet                                 ###

@@ -1,6 +1,5 @@
-## To test locally:
-# docker build --pull --rm -f "contrib/devtools/Dockerfile" -t cosmossdk-proto:latest "contrib/devtools"
-# docker run --rm -v $(pwd):/workspace --workdir /workspace cosmossdk-proto sh ./scripts/protocgen.sh
+## Protobuf codegen for this branch uses contrib/devtools/Dockerfile.proto.
+## `make proto-image` builds cosmossdk-proto:0.14.0 from that file.
 
 FROM bufbuild/buf:1.24.0 as BUILDER
 FROM golang:1.21-alpine
